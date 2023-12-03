@@ -3,7 +3,8 @@ package com.zmj.srb.common.util;
 import com.zmj.srb.common.exception.entity.BusinessException;
 import com.zmj.srb.common.result.ResponseEnum;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.StringUtils;
+
+import java.util.Collection;
 
 @Slf4j
 public abstract class Assert {
@@ -17,6 +18,22 @@ public abstract class Assert {
         if (obj == null) {
             log.info("obj is null...............");
             throw new BusinessException(responseEnum);
+        }
+    }
+
+    public static void notEmpty(Object obj, ResponseEnum responseEnum) {
+        notNull(obj,responseEnum);
+        if (obj instanceof Collection) {
+            if (((Collection<?>) obj).size() == 0) {
+                log.info("obj.size == 0...............");
+                throw new BusinessException(responseEnum);
+            }
+        }
+        if (obj instanceof String) {
+            if (((String) obj).trim().length() == 0) {
+                log.info("obj.length == 0...............");
+                throw new BusinessException(responseEnum);
+            }
         }
     }
 
@@ -71,19 +88,6 @@ public abstract class Assert {
     public static void equals(Object m1, Object m2,  ResponseEnum responseEnum) {
         if (!m1.equals(m2)) {
             log.info("not equals...............");
-            throw new BusinessException(responseEnum);
-        }
-    }
-
-    /**
-     * 断言参数不为空
-     * 如果为空，则抛出异常
-     * @param s
-     * @param responseEnum
-     */
-    public static void notEmpty(String s, ResponseEnum responseEnum) {
-        if (StringUtils.isEmpty(s)) {
-            log.info("is empty...............");
             throw new BusinessException(responseEnum);
         }
     }

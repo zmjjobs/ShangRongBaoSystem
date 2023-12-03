@@ -106,7 +106,7 @@ CREATE TABLE `dict`  (
   `dict_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '编码',
   `create_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_time` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  `is_deleted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '删除标记（0:不可用 1:可用）',
+  `is_deleted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '删除标记（1:已删除，0:未删除）',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_parent_id_value`(`parent_id`, `value`) USING BTREE,
   INDEX `idx_parent_id`(`parent_id`) USING BTREE

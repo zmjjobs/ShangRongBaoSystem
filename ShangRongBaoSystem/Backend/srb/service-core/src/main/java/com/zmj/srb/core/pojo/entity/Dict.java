@@ -1,15 +1,15 @@
 package com.zmj.srb.core.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -48,10 +48,12 @@ public class Dict implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
 
-    @ApiModelProperty(value = "删除标记（0:不可用 1:可用）")
+    @ApiModelProperty(value = "删除标记（0:未删除 1:已删除）")
     @TableField("is_deleted")
     @TableLogic
     private Boolean deleted;
 
-
+    @ApiModelProperty(value = "是否包含子节点")
+    @TableField(exist = false)//在数据库表中忽略此列
+    private boolean hasChildren;
 }

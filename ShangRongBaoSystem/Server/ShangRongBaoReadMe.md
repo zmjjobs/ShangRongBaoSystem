@@ -1,20 +1,4 @@
-# 1.基础
-
-## 1.1 前端基础
-
-```
-D:\VSCodeWorkSpace\mytest\基础
-```
-
-## 1.2 后端mybatis-plus
-
-```
-D:\ideaWorkSpace\ShangRongBaoS\mybatis-plus-demo
-```
-
-
-
-# 2.srb后端系统
+# 1、srb后端系统
 
 ```bash
 D:\ideaWorkSpace\ShangRongBaoS\srb
@@ -27,8 +11,8 @@ springboot版本：  2.3.4.RELEASE
 ```bash
  被依赖层次：
  srb-common
- service-base
- service-core
+ 	service-base
+ 		service-core
 ```
 
 ```sql
@@ -49,7 +33,7 @@ http://localhost:8110/swagger-ui.html
 
 
 
-# 3.srb-admin前端系统
+# 2、srb-admin前端系统
 
 ```bash
 #vscode打开 D:\VSCodeWorkSpace\srb-admin
@@ -57,15 +41,17 @@ http://localhost:8110/swagger-ui.html
 cd D:\VSCodeWorkSpace\srb-admin
 #安装NPM,运行一次就可以
 npm install
+
+google浏览器扩展程序，添加 Vue.jsDevtools.zip
 ```
 
 
 
 
 
-# 3.启动系统
+# 3、启动系统
 
-## 3.1 启动MySQL、Nginx
+## 3.1、 启动MySQL、Nginx
 
 输入 cmd
 按快捷键 Ctrl + Shift + Enter 进入管理员模式
@@ -73,7 +59,7 @@ npm install
 ```shell
 net start MySQL82
 D:
-cd D:\IdeaSpace\MyFactory\ShangRongBaoSystem\srb\Server
+cd D:\IdeaSpace\MyFactory\ShangRongBaoSystem\Server
 copy /y  nginx-srb.conf D:\MyServer\Nginx-1.14\conf\nginx.conf
 cd D:\MyServer\Nginx-1.14
 start nginx.exe
@@ -81,14 +67,16 @@ curl http://localhost
 mysql -uroot -p123456
 ```
 
-## 3.2 启动后端模块
+http://localhost
+
+## 3.2、 启动后端模块
 
 ```bash
 #service-core模块
 service-core/src/main/java/com/zmj/srb/core/ServiceCoreApplication.java
 ```
 
-## 3.3 启动前端模块
+## 3.3、 启动前端模块
 
 ```bash
 # .env.development文件中配置nginx地址

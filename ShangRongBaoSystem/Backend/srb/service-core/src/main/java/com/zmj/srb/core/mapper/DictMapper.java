@@ -1,7 +1,10 @@
 package com.zmj.srb.core.mapper;
 
-import com.zmj.srb.core.pojo.entity.Dict;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zmj.srb.core.pojo.dto.ExcelDictDTO;
+import com.zmj.srb.core.pojo.entity.Dict;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface DictMapper extends BaseMapper<Dict> {
 
+    void insertBatch(List<ExcelDictDTO> list);
+    void deleteAllPhysical();
+    //Map<String,Integer> selectByIds(List<Long> ids);
 }
