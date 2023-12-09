@@ -14,15 +14,18 @@ import com.zmj.srb.core.pojo.dto.ExcelDictDTO;
 import com.zmj.srb.core.pojo.entity.Dict;
 import com.zmj.srb.core.service.DictService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -35,6 +38,9 @@ import java.util.Map;
 @Service
 @Slf4j
 public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements DictService {
+
+    @Resource
+    private RedisTemplate<String,List<Dict>> redisTemplate;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -65,9 +71,18 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
     @Override
     public List<Dict> listByParentId(Long parentId) {
+        String redisKey = "srb:core:dictList:" + parentId;
+        //首先从Redis中获取
+        List<Dict> dictList = redisTemplate.opsForValue().get(redisKey);
+        if (dictList != null && dictList.size() > 0) {
+            log.info("从Redis获取到数据直接返回结果......");
+            return dictList;
+        }
+        //若从Redis获取不到，从数据库中取
+        log.info("从Redis获取不到，从数据库中取数据......");
         QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("parent_id",parentId);
-        List<Dict> dictList = baseMapper.selectList(queryWrapper);
+        dictList = baseMapper.selectList(queryWrapper);
         if (dictList != null && dictList.size() > 0) {
             List<Long> ids = new ArrayList<>();
             dictList.forEach(dict->{
@@ -82,7 +97,9 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
                     }
                 });
             }
-
+            //将数据库获取的数据更新到Redis中,保存一个小时
+            redisTemplate.opsForValue().set(redisKey,dictList,1, TimeUnit.HOURS);
+            log.info("将数据库中取得的数据更新到Redis......");
         }
         return dictList;
     }
