@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteRepositoriesConfiguration">
+    <remote-repository>
+      <option name="id" value="yongyong-finance-nexus" />
+      <option name="name" value="yongyong-finance-nexus" />
+      <option name="url" value="http://10.137.25.212:8081/repository/tongyong-public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="server96" />
+      <option name="name" value="server96" />
+      <option name="url" value="http://10.137.25.167:8081/nexus/content/groups/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="nexus-4.1.2" />
+      <option name="name" value="nexus-4.1.2" />
+      <option name="url" value="http://nexus3.iss-devops.cn/repository/maven-public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jeecg" />
+      <option name="name" value="jeecg Repository" />
+      <option name="url" value="http://maven.jeecg.org/nexus/content/repositories/jeecg" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="tongyong-snapshot" />
+      <option name="name" value="tongyong-snapshot" />
+      <option name="url" value="http://10.137.25.212:8081/repository/tongyong-public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Central Repository" />
+      <option name="url" value="http://10.28.19.103:8081/repository/maven-central" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="Maven Central repository" />
+      <option name="url" value="https://repo1.maven.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss.community" />
+      <option name="name" value="JBoss Community repository" />
+      <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="finance4.1.2" />
+      <option name="name" value="finance4.1.2" />
+      <option name="url" value="http://10.137.25.212:8081/repository/efrd-public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="tongyong-releases" />
+      <option name="name" value="tongyong-releases" />
+      <option name="url" value="http://10.137.25.212:8081/repository/tongyong-public/" />
+    </remote-repository>
+  </component>
+</project>

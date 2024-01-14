@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zmj.srb.core.mapper.DictMapper">
+
+    <insert id="insertBatch">
+        insert into dict (
+        id ,
+        parent_id ,
+        name ,
+        value ,
+        dict_code
+        ) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id} ,
+            #{item.parentId} ,
+            #{item.name} ,
+            #{item.value} ,
+            #{item.dictCode})
+        </foreach>
+    </insert>
+    <delete id="deleteAllPhysical">
+        delete from dict
+    </delete>
+<!--    <resultMap id="childrenCountMap" type="java.util.HashMap">-->
+<!--        <result column="parentId" property="parentId" javaType="java.lang.String"/>-->
+<!--        <result column="childrenCount" property="childrenCount" javaType="java.lang.Integer"/>-->
+<!--    </resultMap>-->
+<!--    <select id="selectByIds"  resultMap="childrenCountMap">-->
+<!--        select parent_id as parentId,count(*) as childrenCount from dict-->
+<!--        where parent_id in (-->
+<!--                            <foreach item="id" separator="," collection="ids">-->
+<!--                                #{id}-->
+<!--                            </foreach>-->
+<!--                            )-->
+<!--        group by parent_id-->
+<!--    </select>-->
+</mapper>

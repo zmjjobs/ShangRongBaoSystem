@@ -1,17 +1,17 @@
 package com.zmj.srb.sms.controller.api;
 
+import com.zmj.srb.common.constant.RedisConstant;
 import com.zmj.srb.common.result.R;
 import com.zmj.srb.common.result.ResponseEnum;
 import com.zmj.srb.common.util.Assert;
 import com.zmj.srb.common.util.RandomUtils;
 import com.zmj.srb.common.util.RegexValidateUtils;
 import com.zmj.srb.sms.service.SmsService;
-import com.zmj.srb.sms.util.SmsProperties;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -30,7 +30,7 @@ public class ApiSmsController {
     private SmsService smsService;
 
     @Resource
-    private RedisTemplate redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     @ApiOperation("获取验证码")
     @GetMapping("/send/{mobile}")
@@ -49,11 +49,14 @@ public class ApiSmsController {
         Map<String,Object> param = new HashMap<>();
         param.put("code", code);
         //发送短信
-        smsService.send(mobile, SmsProperties.TEMPLATE_CODE, param);
+        //FIXME 临时注掉，省去每次都真实发送短信
+        //smsService.send(mobile, SmsProperties.TEMPLATE_CODE, param);
 
         //将验证码存入redis
-        redisTemplate.opsForValue().set("srb:sms:code:" + mobile, code, 5, TimeUnit.MINUTES);
+        String key = RedisConstant.RedisKey.SMS_CODE_PREFIX.getCode() + mobile;
+        stringRedisTemplate.opsForValue().set(key, code, 5, TimeUnit.HOURS);
 
+        log.info("{}={}",key,code);
         return R.ok().message("短信发送成功");
     }
 }
