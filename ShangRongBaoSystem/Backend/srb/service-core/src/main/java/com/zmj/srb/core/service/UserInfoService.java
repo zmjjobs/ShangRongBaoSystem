@@ -2,7 +2,9 @@ package com.zmj.srb.core.service;
 
 import com.zmj.srb.core.pojo.entity.UserInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zmj.srb.core.pojo.vo.LoginVO;
 import com.zmj.srb.core.pojo.vo.RegisterVO;
+import com.zmj.srb.core.pojo.vo.UserInfoVO;
 
 /**
  * <p>
@@ -15,4 +17,6 @@ import com.zmj.srb.core.pojo.vo.RegisterVO;
 public interface UserInfoService extends IService<UserInfo> {
 
     void register(RegisterVO registerVO);
+
+    UserInfoVO login(LoginVO loginVO);
 }

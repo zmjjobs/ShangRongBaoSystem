@@ -28,7 +28,7 @@ git push -u origin master
 
 ```http
 swagger2访问地址:
-http://localhost:8110/swagger-ui.html
+http://localhost:8110/doc.html
 ```
 
 
@@ -67,6 +67,7 @@ cd D:\MyServer\redis
 start redis-server.exe
 curl http://localhost
 mysql -uroot -p123456
+
 ```
 
 http://localhost

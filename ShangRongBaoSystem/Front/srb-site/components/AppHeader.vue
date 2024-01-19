@@ -105,6 +105,7 @@
 <script>
 import '~/assets/font/iconfont.css'
 import cookie from 'js-cookie'
+import userVue from '../pages/user.vue'
 
 export default {
   data() {
@@ -119,10 +120,27 @@ export default {
 
   methods: {
     //显示用户信息
-    showInfo() {},
+    showInfo() {
+      let userInfo = cookie.get('userInfo')
+      if (!userInfo) {
+        console.log('cookie不存在用户信息')
+        this.userInfo = null
+        return
+      }
+      userInfo = JSON.parse(userInfo)
+      this.$axios({
+        url: '/api/core/userInfo/checkToken',
+        method: 'get',
+      }).then((response) => {
+        this.userInfo = userInfo
+      })
+    },
 
     //退出
-    logout() {},
+    logout() {
+      cookie.set('userInfo', '')
+      window.location.href = 'login'
+    },
   },
 }
 </script>
